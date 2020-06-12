@@ -16,5 +16,7 @@ COPY --from=builder /run/app/pdf-to-text/node_modules ./node_modules
 
 COPY src/ ./src
 
-CMD ["node", "src/server.js"]
+RUN npm i -g nodemon
+
+CMD ["nodemon", "src/server.js"]
 

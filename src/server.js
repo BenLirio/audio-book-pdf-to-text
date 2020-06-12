@@ -1,17 +1,22 @@
 console.log("sterted");
 
 const net = require("net");
+const { Socket } = require("dgram");
 
-const server = net.createServer((connection) => {
+// const server = net.createServer((connection) => {
+//   console.log("client connected");
+
+//   connection.on("end", () => {
+//     console.log("client disconnected");
+//   });
+// });
+
+const server = net.createServer();
+server.on("connection", (socket) => {
   console.log("client connected");
-
-  connection.on("end", () => {
-    console.log("client disconnected");
+  socket.on("data", (data) => {
+    console.log(data);
   });
-
-  connection.write("Hello World!\r\n");
-
-  connection.pipe(connection);
 });
 
 server.listen(8080, () => {
